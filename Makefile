@@ -12,13 +12,13 @@ $(shell mkdir -p $(OBJ_DIR))
 all: $(BIN_DIR)/$(BIN)
 
 $(BIN_DIR)/$(BIN): $(OBJ)
-				   $(CC) $(CFLAGS) $^ -o $@
+		$(CC) $(CFLAGS) $^ -o $@
 
 $(OBJ_DIR)/%.o: %.c
-			   $(CC) $< -c -o $@
+		$(CC) $< -c -o $@
 
 $(OBJ_DIR)/$(BIN).o: main.c
-			         $(CC) $< -c -o $@
+		$(CC) $< -c -o $@
 
 
 .PHONY: clean
