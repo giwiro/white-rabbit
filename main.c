@@ -1,7 +1,7 @@
 #include "stdio.h"
-#include "microhttpd.h"
 #include "utils.h"
 #include "logger.h"
+#include "microhttpd.h"
 
 int main() {
 	print_banner();

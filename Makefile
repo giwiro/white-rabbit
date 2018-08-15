@@ -1,5 +1,15 @@
 CC=gcc
-CFLAGS=-O3 -pipe -Wall -Wextra
+CSTATICFLAGS=-static -static-libgcc
+OSX_CSTATICFLAGS=-Bstatic -v
+
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+	CFLAGS=-O3 -pipe -Wall -Wextra $(CSTATICFLAGS)
+endif
+ifeq ($(UNAME_S),Darwin)
+	CFLAGS=-O3 -pipe -Wall -Wextra $(OSX_CSTATICFLAGS)
+	OSFLAG += -D OSX
+endif
 BIN_DIR=bin
 BIN=white-rabbit
 OBJ_DIR=obj
