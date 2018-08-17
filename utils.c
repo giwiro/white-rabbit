@@ -3,7 +3,9 @@
 #include "string.h"
 #include "stdlib.h"
 #include "utils.h"
+#include "unistd.h"
 #include "logger.h"
+
 
 void print_banner() {
     printf("\n\n%s\n", "                          .\".");

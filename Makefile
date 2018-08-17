@@ -1,15 +1,21 @@
 CC=gcc
+UNAME_S := $(shell uname -s)
 CSTATICFLAGS=-static -static-libgcc
 OSX_CSTATICFLAGS=-Bstatic -v
 
-UNAME_S := $(shell uname -s)
+ifeq ($(DEBUG), 1)
+	TARGET_FLAGS=-DDEBUG
+else
+	TARGET_FLAGS=-DRELEASE
+endif
+
 ifeq ($(UNAME_S),Linux)
 	CFLAGS=-O3 -pipe -Wall -Wextra $(CSTATICFLAGS)
-endif
+endif	
 ifeq ($(UNAME_S),Darwin)
 	CFLAGS=-O3 -pipe -Wall -Wextra $(OSX_CSTATICFLAGS)
-	OSFLAG += -D OSX
 endif
+
 BIN_DIR=bin
 BIN=white-rabbit
 OBJ_DIR=obj
@@ -25,13 +31,15 @@ $(BIN_DIR)/$(BIN): $(OBJ)
 		$(CC) $(CFLAGS) $^ -o $@
 
 $(OBJ_DIR)/%.o: %.c
-		$(CC) $< -c -o $@
+		$(CC) $(TARGET_FLAGS) $< -c -o $@
 
 $(OBJ_DIR)/$(BIN).o: main.c
-		$(CC) $< -c -o $@
+		$(CC) $(TARGET_FLAGS) $< -c -o $@
 
 
 .PHONY: clean
 clean:
 		rm -f $(OBJ) $(BIN_DIR)/$(BIN)
 		rm -rf $(OBJ_DIR) $(BIN_DIR)
+
+print-%  : ; @echo $* = $($*)
