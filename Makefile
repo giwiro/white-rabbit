@@ -1,6 +1,6 @@
 CC=gcc
 UNAME_S := $(shell uname -s)
-CSTATICFLAGS=-static -static-libgcc
+CSTATICFLAGS=-static -static-libgcc 
 OSX_CSTATICFLAGS=-Bstatic -v
 
 ifeq ($(DEBUG), 1)
@@ -10,7 +10,8 @@ else
 endif
 
 ifeq ($(UNAME_S),Linux)
-	CFLAGS=-O3 -pipe -Wall -Wextra $(CSTATICFLAGS)
+	# CFLAGS=-O3 -pipe -Wall -Wextra $(CSTATICFLAGS) -lmicrohttpd
+	CFLAGS=-O3 -pipe -Wall -Wextra -lmicrohttpd
 endif	
 ifeq ($(UNAME_S),Darwin)
 	CFLAGS=-O3 -pipe -Wall -Wextra $(OSX_CSTATICFLAGS)

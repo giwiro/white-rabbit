@@ -3,8 +3,6 @@
 
 #include "stdint.h"
 
-
-
 #define PORT_ENV_KEY "PORT"
 #define THREAD_POOL_SIZE_KEY "THREAD_POOL_SIZE"
 #define DEFAULT_HOSTNAME "UNKNOWN"
