@@ -40,9 +40,6 @@ uint32_t get_port() {
     // Use of strtol
     char *end_ptr;
     const uint32_t port = strtol(port_str, &end_ptr, 10);
-    // printf("(%zu) %s\r\n", port_size, port_str);
-    // printf("PORT=%d\r\n", port);
-    // printf("DEFAULT_PORT=%d\r\n", DEFAULT_PORT);
     if (port_str == end_ptr || port == 0) {
         log_message(stderr, "[ERRO]: PORT is not a valid number, returning default.\r\n");
         return DEFAULT_PORT;
@@ -69,5 +66,11 @@ uint32_t get_thread_pool_size() {
         return DEFAULT_THREAD_POOL_SIZE;
     }
     return threads;
+}
+
+void get_hostname(char *hostname) {
+    if (gethostname(hostname, DEFAULT_HOSTNAME_BUFFER_SIZE) == -1) {
+        strncpy(hostname, DEFAULT_HOSTNAME, DEFAULT_HOSTNAME_LENGTH);
+    }
 }
 
