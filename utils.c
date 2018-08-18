@@ -4,6 +4,7 @@
 #include "stdlib.h"
 #include "utils.h"
 #include "unistd.h"
+#include "defaults.h"
 #include "logger.h"
 
 void print_banner() {

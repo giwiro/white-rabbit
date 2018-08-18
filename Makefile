@@ -11,10 +11,11 @@ else
 	TARGET_FLAGS=-DRELEASE
 endif
 
-#ifeq ($(UNAME_S),Linux)
+ifeq ($(UNAME_S),Linux)
+	TARGET_FLAGS+=-DEPOLL_SUPPORT
 	# CFLAGS=-O3 -pipe -Wall -Wextra $(CSTATICFLAGS) -lmicrohttpd
 #	CFLAGS=-O3 -pipe -Wall -Wextra -lmicrohttpd
-#endif	
+endif	
 #ifeq ($(UNAME_S),Darwin)
 	# CFLAGS=-O3 -pipe -Wall -Wextra $(OSX_CSTATICFLAGS)
 #	CFLAGS=-O3 -pipe -Wall -Wextra -lmicrohttpd 
