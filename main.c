@@ -1,4 +1,5 @@
 #include "stdio.h"
+#include "stdlib.h"
 #include "sys/types.h"
 #include "sys/select.h"
 #include "sys/socket.h"
@@ -6,21 +7,12 @@
 #include "utils.h"
 #include "defaults.h"
 #include "logger.h"
+#include "controller.h"
 
-static int
-answer_to_connection(void *cls, struct MHD_Connection *connection,
-                     const char *url, const char *method,
-                     const char *version, const char *upload_data,
-                     size_t *upload_data_size, void **con_cls)
-{
-  printf ("New %s request for %s using version %s\n", method, url, version);
-
-  return MHD_NO;
-}
-
+char *hostname;
 
 int main() {
-    char hostname[DEFAULT_HOSTNAME_BUFFER_SIZE];
+    hostname = (char *)malloc(DEFAULT_HOSTNAME_BUFFER_SIZE + 1);
     print_banner();
     uint32_t port = get_port();
     uint32_t threads = get_thread_pool_size();
@@ -56,11 +48,14 @@ int main() {
         MHD_OPTION_THREAD_POOL_SIZE, (unsigned int) threads,
         MHD_OPTION_CONNECTION_TIMEOUT, (unsigned int) DEFAULT_TIME_OUT,
         MHD_OPTION_END);
-        if (NULL == daemon)
-            return 1;
-        log_message(stdout, "[LOG]: (/¯◡ ‿ ◡)/¯﻿ wh1t3-r4bb1t listening...\r\n");
-        getchar();
+    if (NULL == daemon)
+        return 1;
+    log_message(stdout, "[LOG]: (/¯◡ ‿ ◡)/¯﻿ wh1t3-r4bb1t listening...\r\n");
+    getchar();
 
-        MHD_stop_daemon (daemon);
-        return 0;
+    log_message(stdout, "[LOG]: Killing daemon\r\n");
+    MHD_stop_daemon (daemon);
+    log_message(stdout, "[LOG]: Freeing allocated variables\r\n");
+    free(hostname);
+    return 0;
 }
