@@ -3,6 +3,7 @@
 
 #define URL "/whois"
 #define URL_SIZE 6
+#define ALLOWED_ORIGIN "http://127.0.0.1:6543"
 
 // This little fucker here is a hack, because we ensure the hostname variable
 // existance in the main.c file, but we put this in order to compile with no not found errors.

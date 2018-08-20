@@ -29,7 +29,7 @@ int handle_options(struct MHD_Connection *connection) {
     int ret;
     struct MHD_Response *response;
     response = MHD_create_response_from_buffer(0, "", MHD_RESPMEM_PERSISTENT);
-    MHD_add_response_header(response, "Access-Control-Allow-Origin", "*");
+    MHD_add_response_header(response, "Access-Control-Allow-Origin", ALLOWED_ORIGIN);
     MHD_add_response_header(response, "Access-Control-Allow-Methods", "GET, OPTIONS");
     MHD_add_response_header(response, "Access-Control-Allow-Credentials", "false");
     MHD_add_response_header(response, "Access-Control-Max-Age", "86400");
@@ -44,6 +44,7 @@ int handle_whois_route(struct MHD_Connection *connection, char *hostname) {
     int ret;
     struct MHD_Response *response;
     response = MHD_create_response_from_buffer(strlen(hostname), hostname, MHD_RESPMEM_PERSISTENT);
+    MHD_add_response_header(response, "Access-Control-Allow-Origin", ALLOWED_ORIGIN);
     MHD_add_response_header(response, "X-Powered-By", "wh1t3-r4bb1t");
     MHD_add_response_header(response, "Content-Type", "text/plain");
     ret = MHD_queue_response(connection, MHD_HTTP_OK, response);
