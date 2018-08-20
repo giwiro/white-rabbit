@@ -13,21 +13,24 @@ Some things to take notice:
 ## Install libmicrohttpd
 First download [libmicrohttpd](https://www.gnu.org/software/libmicrohttpd/).
 
-Fedora:
-```
-sudo dnf install libmicrohttpd libmicrohttpd-devel
-```
-Ubuntu:
-```
-sudo apt-get install libmicrohttpd libmicrohttpd-dev
-```
+* Fedora:
+	```
+	sudo dnf install libmicrohttpd libmicrohttpd-devel
+	```
+* Ubuntu:
+	```
+	sudo apt-get install libmicrohttpd libmicrohttpd-dev
+	```
 
 ## Make
 Execute `make`. You can use this options:
 
 - `DEBUG=1`: It uses the `MHD_USE_DEBUG`
 
-# ** FAQ **
+## Binary
+The binary should be on the folder `bin`.
+
+# FAQ
 
 * Which **threading model** should i use ?
 
